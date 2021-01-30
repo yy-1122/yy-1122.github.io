@@ -474,7 +474,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    510
+                    494
                 </div>
                 
 
@@ -504,15 +504,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <!-- toc -->
-
-<ul>
-<li><a href="#%E4%B8%80-%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E6%94%AF%E9%A2%84%E6%B5%8B">一、什么是分支预测</a></li>
-<li><a href="#%E4%BA%8C-%E5%88%86%E6%94%AF%E9%A2%84%E6%B5%8B%E7%9A%84%E4%BD%BF%E7%94%A8">二、分支预测的使用</a></li>
-</ul>
-<!-- tocstop -->
-
-<h1><span id="一-什么是分支预测">一、什么是分支预测</span></h1><p>CPU 在遇到 if 分支结构发语句时是怎么处理的呢？</p>
+                <h1><span id="一-什么是分支预测">一、什么是分支预测</span></h1><p>CPU 在遇到 if 分支结构发语句时是怎么处理的呢？</p>
 <p>我们想象一下，假如你遇到了一个分叉路口，而此时你并不知道目的地在哪个方向，你会怎么做呢？</p>
 <p>很显然，你只能随机选择一条路继续前进，如果你猜对了，那么恭喜你。但是如果你猜错了呢，毫无疑问，你只能沿路返回路口，再选择另一条路，CPU在遇到 if 语句是也是如此。</p>
 <p><img src="https://i.loli.net/2021/01/29/GdwKUNnMhIAB47b.jpg"></p>
@@ -927,6 +919,12 @@ OK
 
 <!-- TOC 悬浮按钮. -->
 
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
 
 <script src="/libs/tocbot/tocbot.min.js"></script>
 <script>
@@ -935,8 +933,8 @@ OK
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number(''),
-            headingSelector: ''
+            collapseDepth: Number('3'),
+            headingSelector: 'h1, h2, h3'
         });
 
         // modify the toc link href to support Chinese.
@@ -948,7 +946,7 @@ OK
 
         // modify the heading title id to support Chinese.
         i = 0;
-        $('#articleContent').children('').each(function () {
+        $('#articleContent').children('h1, h2, h3').each(function () {
             $(this).attr('id', tocHeading + (++i));
         });
 
@@ -965,6 +963,41 @@ OK
             }
         });
 
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
         
     });
 </script>
@@ -1052,7 +1085,7 @@ OK
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">597</span>&nbsp;字
+                class="white-color">581</span>&nbsp;字
             
             
             
