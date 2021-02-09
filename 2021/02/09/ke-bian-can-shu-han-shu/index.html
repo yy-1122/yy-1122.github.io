@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="欧几里得和扩展欧几里得算法, Phantom Lamb">
+    <meta name="keywords" content="变参函数和变参宏定义, Phantom Lamb">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>欧几里得和扩展欧几里得算法 | Phantom Lamb</title>
+    <title>变参函数和变参宏定义 | Phantom Lamb</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">欧几里得和扩展欧几里得算法</h1>
+                    <h1 class="description center-align post-title">变参函数和变参宏定义</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">
-                                <span class="chip bg-color">基础算法</span>
+                            <a href="/tags/%E5%87%BD%E6%95%B0/">
+                                <span class="chip bg-color">函数</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%AE%8F/">
+                                <span class="chip bg-color">宏</span>
                             </a>
                         
                     </div>
@@ -443,8 +447,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                算法
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
+                                C语言
                             </a>
                         
                     </div>
@@ -470,7 +474,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    718
+                    883
                 </div>
                 
 
@@ -500,67 +504,79 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1><span id="一-欧几里得算法">一、欧几里得算法</span></h1><p>简介：辗转相除法， 又名<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%B7%E7%AE%97%E6%B3%95/9002848">欧几里德算法</a>（Euclidean algorithm），是求最大公约数的一种方法。它的具体做法是：用较大数除以较小数，再用出现的余数（第一余数）去除除数，再用出现的余数（第二余数）去除第一余数，如此反复，直到最后余数是0为止。如果是求两个数的最大公约数，那么最后的除数就是这两个数的最大公约数。</p>
-<p>另一种求两数的最大公约数的方法是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9B%B4%E7%9B%B8%E5%87%8F%E6%8D%9F%E6%B3%95/10277459">更相减损法</a>。</p>
-<h3><span id="辗转相除法举例">辗转相除法举例：</span></h3><p>求 10 ，25的最大公约数：<br>25 / 10 = 2 ······5<br>10 / 5  = 2 ······0<br>所以10，25的最大公约数为5</p>
-<h3><span id="原理">原理：</span></h3><p><img src="https://i.loli.net/2021/02/09/UltH8sr1E5LGjzY.jpg"></p>
-<p><img src="https://i.loli.net/2021/02/09/YomK46dHDvLgihq.jpg"></p>
-<h3><span id="代码实现">代码实现：</span></h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;cstdio&gt;
+                <h2><span id="一-变参函数介绍">一、变参函数介绍</span></h2><p>C 语言允许定义参数数量可变的函数，这称为可变参数函数（variadic function）。这种函数需要固定数量的强制参数（mandatory argument），后面是数量可变的可选参数（optional argument）。</p>
+<p>可变参数函数要获取可选参数时，必须通过一个类型为 va_list 的对象，它包含了参数信息。这种类型的对象也称为参数指针（argument pointer），它包含了栈中至少一个参数的位置。可以使用这个参数指针从一个可选参数移动到下一个可选参数，由此，函数就可以获取所有的可选参数。va_list 类型被定义在头文件 stdarg.h 中。</p>
+<h2><span id="二-使用方法">二、使用方法</span></h2><ul>
+<li>定义一个函数，最后一个参数为省略号，省略号前面可以设置自定义参数。</li>
+<li>在函数定义中创建一个 <strong>va_list</strong> 类型变量，该类型是在 stdarg.h 头文件中定义的。</li>
+<li>使用 固定参数和 <strong>va_start</strong> 宏来初始化 <strong>va_list</strong> 变量为一个参数列表。宏 va_start 是在 stdarg.h 头文件中定义的。</li>
+<li>使用 <strong>va_arg</strong> 宏和 <strong>va_list</strong> 变量来访问参数列表中的每个项。</li>
+<li>使用宏 <strong>va_end</strong> 来清理赋予 <strong>va_list</strong> 变量的内存。</li>
+</ul>
+<h4><span id="代码演示">代码演示</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdint></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;inttypes.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdarg.h></span></span>
 
-int gcd(int a, int b) &#123;
-    if (b &#x3D;&#x3D; 0) return a;
-    return gcd(b, a % b);
-&#125;
+<span class="token keyword">int</span> <span class="token function">IntMax</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> ans <span class="token operator">=</span> INT32_MIN<span class="token punctuation">;</span>
+    va_list arg<span class="token punctuation">;</span>
+    <span class="token function">va_start</span><span class="token punctuation">(</span>arg<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>n<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> temp <span class="token operator">=</span> <span class="token function">va_arg</span><span class="token punctuation">(</span>arg<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ans <span class="token operator">&lt;</span> temp<span class="token punctuation">)</span> ans <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">va_end</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-int main() &#123;
-    int a, b;
-    scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
-    int ans &#x3D; gcd(a, b);
-    printf(&quot;%d\n&quot;, ans);
-    return 0;
-&#125;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3><span id="运行结果">运行结果：</span></h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">$ <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
-<span class="token number">25</span> <span class="token number">10</span>
-<span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h1><span id="二-扩展欧几里得算法">二、扩展欧几里得算法</span></h1><h3><span id="原理">原理：</span></h3><p><strong>贝祖定理</strong>：如果a、b是整数，那么一定存在整数 x、y 使得 ax+by=gcd(a,b)。</p>
-<p><strong>扩展欧几里得</strong>：</p>
-<p>​    当到达递归边界的时候，b=0，a=gcd(a,b) 这时可以观察出来这个式子的一个解：a*1+b*0=gcd(a,b)，x=1,y=0，注意这时的a和b已经不是最开始的那个a和b了，所以我们如果想要求出解x和y，就要回到最开始的模样。</p>
-<p>   假设当前我们在求a和b的最大公约数，而我们已经求出了下一个状态：b和a%b的最大公因数，并且求出了一组x1和y1使得             b*x1+(a%b)*y1=gcd</p>
-<p>（注意在递归算法中，永远都是先得到下面一个状态的值）</p>
-<p>这时我们可以试着去寻找这两个相邻状态的关系：</p>
-<p>首先我们知道：a%b=a-(a/b)*b；带入：</p>
-<p>b*x1 + (a-(a/b)*b)*y1</p>
-<p>= b*x1 + a*y1 – (a/b)<em>b</em>y1</p>
-<p>= a*y1 + b*(x1 – a/b*y1) = gcd  </p>
-<p>此时我们发现如果要使上一层等式 ax+by=gcd 成立，则需要 x = y1 , y = x1 – a/b*y1</p>
-<p>这样我们就得到了每两个相邻状态的x和y的转化，就可以在求gcd的同时对x和y进行求值了</p>
-<h3><span id="代码实现">代码实现：</span></h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;cstdio&gt;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"max = %d\n"</span><span class="token punctuation">,</span> <span class="token function">IntMax</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"max = %d\n"</span><span class="token punctuation">,</span><span class="token function">IntMax</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"max = %d\n"</span><span class="token punctuation">,</span><span class="token function">IntMax</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4><span id="运行结果">运行结果：</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"> <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
+max <span class="token operator">=</span> <span class="token number">3</span>
+max <span class="token operator">=</span> <span class="token number">5</span>
+max <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2><span id="三-变参宏定义">三、变参宏定义</span></h2><p>C99中规定宏可以像函数一样带有可变参数，比如</p>
+<pre class="line-numbers language-none"><code class="language-none">#define LOG(format, ...) fprintf(stdout, format, __VA_ARGS__)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其中，…表示参数可变，__VA_ARGS__在预处理中为实际的参数集所替换</p>
+<p>GCC中同时支持如下的形式</p>
+<pre class="line-numbers language-none"><code class="language-none">#define LOG(format, args...) fprintf(stdout, format, args)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>其用法和上面的基本一致，只是参数符号有变化</p>
+<p><strong>可变参数的宏里的‘##’操作说明</strong> </p>
+<p>GNU CPP还有两种更复杂的宏扩展，支持上面两种格式的定义格式。</p>
+<p>在标准C里，你不能省略可变参数，但是你却可以给它传递一个空的参数。例如，下面的宏调用在ISO C里是非法的，因为字符串后面没有逗号：</p>
+<p>debug (“A message”)</p>
+<p>GNU CPP在这种情况下可以让你完全的忽略可变参数。在上面的例子中，编译器仍然会有问题（complain），因为宏展开后，里面的字符串后面会有个多余的逗号。</p>
+<p>为了解决这个问题，CPP使用一个特殊的‘##’操作。书写格式为：</p>
+<p>#define debug(format, …) fprintf (stderr, format, ## __VA_ARGS__)</p>
+<p>这里，如果可变参数被忽略或为空，‘##’操作将使预处理器（preprocessor）去除掉它前面的那个逗号。如果你在宏调用时，确实提供了一些可变参数，GNU CPP也会工作正常，它会把这些可变参数放到逗号的后面。象其它的pasted macro参数一样，这些参数不是宏的扩展。</p>
+<h4><span id="代码演示">代码演示：</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdint></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;inttypes.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdarg.h></span></span>
 
-int ex_gcd(int a, int b, int *x, int *y) &#123;
-    if (b &#x3D;&#x3D; 0) &#123;
-        *x &#x3D; 1;
-        *y &#x3D; 0;
-        return a;
-    &#125;
-    int xx, yy, ret &#x3D; ex_gcd(b, a % b, &amp;xx, &amp;yy);
-    *x &#x3D; yy;
-    *y &#x3D; xx - a &#x2F; b * yy;
-    return ret;
-&#125;
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">LOG</span><span class="token expression"><span class="token punctuation">(</span>frm<span class="token punctuation">,</span> args<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></span><span class="token punctuation">\</span>
+    <span class="token expression"><span class="token function">printf</span><span class="token punctuation">(</span>frm<span class="token punctuation">,</span> </span><span class="token punctuation">##</span><span class="token expression">args<span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token punctuation">\</span>
+<span class="token expression"><span class="token punctuation">&#125;</span></span></span>
 
-int main() &#123;
-    int a, b, x, y;
-    scanf(&quot;%d%d&quot;, &amp;a, &amp;b);
-    printf(&quot;gcd(%d, %d) &#x3D; %d\n&quot;, a, b, ex_gcd(a, b, &amp;x, &amp;y));
-    printf(&quot;%d * %d + %d * %d &#x3D; %d\n&quot;, a, x, b, y, a * x + b * y);
-    return 0;
-&#125;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3><span id="运行结果">运行结果：</span></h3><pre class="line-numbers language-c" data-language="c"><code class="language-c">$ <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
-<span class="token number">25</span> <span class="token number">10</span>
-<span class="token function">gcd</span><span class="token punctuation">(</span><span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">5</span>
-<span class="token number">25</span> <span class="token operator">*</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token number">10</span> <span class="token operator">*</span> <span class="token operator">-</span><span class="token number">2</span> <span class="token operator">=</span> <span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token function">LOG</span><span class="token punctuation">(</span><span class="token string">"LOG1\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">LOG</span><span class="token punctuation">(</span><span class="token string">"LOG2: %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">LOG</span><span class="token punctuation">(</span><span class="token string">"LOG3: %d, %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">LOG</span><span class="token punctuation">(</span><span class="token string">"LOG4: %d, %d, %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4><span id="运行结果">运行结果：</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c">$ <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
+LOG1
+LOG2<span class="token operator">:</span> <span class="token number">1</span>
+LOG3<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span>
+LOG4<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -587,7 +603,7 @@ int main() &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yy-1122.github.io/2021/02/09/ou-ji-li-de-suan-fa/">http://yy-1122.github.io/2021/02/09/ou-ji-li-de-suan-fa/</a>
+                    <a href="http://yy-1122.github.io/2021/02/09/ke-bian-can-shu-han-shu/">http://yy-1122.github.io/2021/02/09/ke-bian-can-shu-han-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -625,8 +641,12 @@ int main() &#123;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">
-                                    <span class="chip bg-color">基础算法</span>
+                                <a href="/tags/%E5%87%BD%E6%95%B0/">
+                                    <span class="chip bg-color">函数</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%AE%8F/">
+                                    <span class="chip bg-color">宏</span>
                                 </a>
                             
                         </div>
@@ -798,9 +818,10 @@ int main() &#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/02/09/ke-bian-can-shu-han-shu/">
                     <div class="card-image">
@@ -818,9 +839,9 @@ int main() &#123;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -833,6 +854,7 @@ int main() &#123;
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -855,13 +877,13 @@ int main() &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/01/29/linux-ming-ling/">
+                <a href="/2021/02/09/ou-ji-li-de-suan-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Linux命令">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="欧几里得和扩展欧几里得算法">
                         
-                        <span class="card-title">Linux命令</span>
+                        <span class="card-title">欧几里得和扩展欧几里得算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -872,14 +894,14 @@ int main() &#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                    Linux系统
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
@@ -889,8 +911,8 @@ int main() &#123;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">Linux系统</span>
+                    <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">基础算法</span>
                     </a>
                     
                 </div>
