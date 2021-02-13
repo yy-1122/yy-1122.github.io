@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="冒泡排序, Phantom Lamb">
+    <meta name="keywords" content="选择排序, Phantom Lamb">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>冒泡排序 | Phantom Lamb</title>
+    <title>选择排序 | Phantom Lamb</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">冒泡排序</h1>
+                    <h1 class="description center-align post-title">选择排序</h1>
                 </div>
             </div>
         </div>
@@ -435,8 +435,8 @@
                                 <span class="chip bg-color">排序算法</span>
                             </a>
                         
-                            <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/">
-                                <span class="chip bg-color">稳定排序</span>
+                            <a href="/tags/%E9%9D%9E%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/">
+                                <span class="chip bg-color">非稳定排序</span>
                             </a>
                         
                     </div>
@@ -460,7 +460,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-02-12
+                    2021-02-13
                 </div>
                 
 
@@ -474,7 +474,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    297
+                    232
                 </div>
                 
 
@@ -504,18 +504,16 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1><span id="冒泡排序">冒泡排序</span></h1><h2><span id="一-原理">一、原理</span></h2><p>1、将数组分成 已排序区 和 待排序区， 已排序区 在后，待排序区 在前。</p>
-<p>2、从头到尾扫描 待排序区 ，若前面元素比后面元素大，则交换。到达末尾时，此时 待排序区 的最后一个元素即选出来的最大元素，插入到 已排序区 首位。</p>
-<p>4、循环，直到 待排序区 没有元素为止</p>
+                <h1><span id="选择排序">选择排序</span></h1><h2><span id="一-原理">一、原理</span></h2><p>1、将数组分成 已排序区 和 待排序区，已排序区 在前， 待排序区 在后</p>
+<p>2、每一轮从 待排序区 中选择一个最小的元素放到 已排序区 的尾部</p>
+<p>3、循环直到 待排序区 没有元素为止</p>
 <p>例：</p>
-<p>交换 4 和 5</p>
-<p><img src="https://i.loli.net/2021/02/12/ErBgZYs37hGMyAo.jpg"></p>
-<p><img src="https://i.loli.net/2021/02/12/W3vJiKPB8VOXA9U.jpg"></p>
-<p>7 到达 待排序区 末尾</p>
-<p><img src="https://i.loli.net/2021/02/12/MjB3k2zshnKcx5R.jpg"></p>
-<p>7 插入到 已排序区 首位</p>
-<p><img src="https://i.loli.net/2021/02/12/LUbmsRZTrvxN7t2.jpg"></p>
+<p>将 待排序区 中最小值 3，插入到 已排序区 尾部</p>
+<p><img src="https://i.loli.net/2021/02/13/HStuG8eylFWjzQU.jpg"></p>
+<p><img src="https://i.loli.net/2021/02/13/BSAjuDWaPFqgJLk.jpg"></p>
 <h2><span id="二-代码">二、代码</span></h2><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdlib></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstring></span></span>
 
 <span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">Swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>a<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> temp <span class="token operator">=</span> a<span class="token punctuation">;</span>
@@ -524,22 +522,21 @@
     <span class="token keyword">return</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
-<span class="token keyword">void</span> <span class="token function">BubbleSort</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>arr<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> times<span class="token punctuation">;</span> <span class="token comment">//记录本轮扫描是否有交换，若无交换则序列已经完成排序，可退出循环</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">&amp;&amp;</span> times<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        times <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n <span class="token operator">-</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> arr<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
-            <span class="token function">Swap</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            times<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">SelectSort</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>arr<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> ind <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>arr<span class="token punctuation">[</span>ind<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            ind <span class="token operator">=</span> j<span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
+        <span class="token function">Swap</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>ind<span class="token punctuation">]</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token function">BubbleSort</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">SelectSort</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         i <span class="token operator">&amp;&amp;</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -547,7 +544,7 @@
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">$ <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
 <span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">9</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -576,7 +573,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yy-1122.github.io/2021/02/12/mou-pao-pai-xu/">http://yy-1122.github.io/2021/02/12/mou-pao-pai-xu/</a>
+                    <a href="http://yy-1122.github.io/2021/02/13/xuan-ze-pai-xu/">http://yy-1122.github.io/2021/02/13/xuan-ze-pai-xu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -618,8 +615,8 @@
                                     <span class="chip bg-color">排序算法</span>
                                 </a>
                             
-                                <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/">
-                                    <span class="chip bg-color">稳定排序</span>
+                                <a href="/tags/%E9%9D%9E%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/">
+                                    <span class="chip bg-color">非稳定排序</span>
                                 </a>
                             
                         </div>
@@ -791,17 +788,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/02/12/gui-bing-pai-xu/">
+                <a href="/2021/02/13/xuan-ze-pai-xu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="归并排序">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="选择排序">
                         
-                        <span class="card-title">归并排序</span>
+                        <span class="card-title">选择排序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -811,9 +809,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -826,6 +824,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -833,8 +832,8 @@
                         <span class="chip bg-color">排序算法</span>
                     </a>
                     
-                    <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">稳定排序</span>
+                    <a href="/tags/%E9%9D%9E%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/">
+                        <span class="chip bg-color">非稳定排序</span>
                     </a>
                     
                 </div>
@@ -848,13 +847,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/12/cha-ru-pai-xu/">
+                <a href="/2021/02/13/kuai-su-pai-xu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="插入排序">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="快速排序">
                         
-                        <span class="card-title">插入排序</span>
+                        <span class="card-title">快速排序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -865,7 +864,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-13
                             </span>
                         <span class="publish-author">
                             
@@ -886,8 +885,8 @@
                         <span class="chip bg-color">排序算法</span>
                     </a>
                     
-                    <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">稳定排序</span>
+                    <a href="/tags/%E9%9D%9E%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F/">
+                        <span class="chip bg-color">非稳定排序</span>
                     </a>
                     
                 </div>
