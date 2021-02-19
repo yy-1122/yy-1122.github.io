@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="牛顿迭代法, Phantom Lamb">
+    <meta name="keywords" content="计算机网络的分类, Phantom Lamb">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>牛顿迭代法 | Phantom Lamb</title>
+    <title>计算机网络的分类 | Phantom Lamb</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">牛顿迭代法</h1>
+                    <h1 class="description center-align post-title">计算机网络的分类</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95/">
-                                <span class="chip bg-color">牛顿迭代法</span>
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB/">
+                                <span class="chip bg-color">计算机网络分类</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                算法
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
+                                计算机网络
                             </a>
                         
                     </div>
@@ -456,21 +456,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-02-10
+                    2021-02-19
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-02-13
+                    2021-02-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    224
+                    65
                 </div>
                 
 
@@ -500,59 +500,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1><span id="一-原理">一、原理</span></h1><p>牛顿迭代法是一种解决一元高次方程的算法</p>
-<p><img src="https://i.loli.net/2021/02/10/38ZvPN5wjSr6JTq.jpg"></p>
-<p>算法推导过程：</p>
-<p>通过不断迭代直到（x<em>，0）处，求得x\</em>的近似值</p>
-<p>对于点（x0，f(x0)）迭代到（x1, 0）,</p>
-<p>（x0， f(x0)）的两点式切线方程为：</p>
-<p>0 - f(x0) = f’(x0)(x1 - x0)</p>
-<p>可得迭代式：x1 = x0 - f(x0) / f’(x0)</p>
-<h1><span id="二-代码">二、代码</span></h1><p>求 f(x) = x^2 的根</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span>                                                                                                           </span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cmath></span>                                                                                                            </span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">EPSL</span> <span class="token expression"><span class="token number">1e-7</span>                                                                                                           </span></span>
-
-<span class="token keyword">double</span> <span class="token function">F</span><span class="token punctuation">(</span><span class="token keyword">double</span> x<span class="token punctuation">,</span> <span class="token keyword">double</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> x <span class="token operator">*</span> x <span class="token operator">-</span> n<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">double</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">double</span> x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> x<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">double</span> <span class="token function">NewTon</span><span class="token punctuation">(</span><span class="token keyword">double</span> <span class="token punctuation">(</span><span class="token operator">*</span>F<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">,</span> <span class="token keyword">double</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">double</span> <span class="token punctuation">(</span><span class="token operator">*</span>f<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">double</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">double</span> x <span class="token operator">=</span> n <span class="token operator">/</span> <span class="token number">2.0</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">fabs</span><span class="token punctuation">(</span><span class="token function">F</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">></span> EPSL<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        x <span class="token operator">-=</span> <span class="token function">F</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token function">f</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> x<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">double</span> <span class="token function">MySqrt</span><span class="token punctuation">(</span><span class="token keyword">double</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token function">NewTon</span><span class="token punctuation">(</span>F<span class="token punctuation">,</span> f<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">double</span> n<span class="token punctuation">,</span> ans<span class="token punctuation">;</span>
-    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%lf"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"x^2 = %lf\n"</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    ans <span class="token operator">=</span> <span class="token function">MySqrt</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"x = %lf\n"</span><span class="token punctuation">,</span> ans<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4><span id="运行结果">运行结果：</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c">$ <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
-<span class="token number">4</span>
-x<span class="token operator">^</span><span class="token number">2</span> <span class="token operator">=</span> <span class="token number">4.000000</span>
-x <span class="token operator">=</span> <span class="token number">2.000000</span>
-
-$ <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
-<span class="token number">5</span>
-x<span class="token operator">^</span><span class="token number">2</span> <span class="token operator">=</span> <span class="token number">5.000000</span>
-x <span class="token operator">=</span> <span class="token number">2.236068</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h1><span id="计算机网络的分类">计算机网络的分类</span></h1><p><img src="https://i.loli.net/2021/02/19/f1yCL3sQlhqo2FR.jpg"></p>
+<p>注：</p>
+<p>总线型结构中，所有节点都通过总线收发信息。<br>星型结构的中心节点故障会使整个网络瘫痪。<br>环型结构的单点故障则不会影响整个网络。</p>
 
                 
             </div>
@@ -579,7 +529,7 @@ x <span class="token operator">=</span> <span class="token number">2.236068</spa
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yy-1122.github.io/2021/02/10/niu-dun-die-dai-fa/">http://yy-1122.github.io/2021/02/10/niu-dun-die-dai-fa/</a>
+                    <a href="http://yy-1122.github.io/2021/02/19/ji-suan-ji-wang-luo-de-fen-lei-tuo-bu-jie-gou/">http://yy-1122.github.io/2021/02/19/ji-suan-ji-wang-luo-de-fen-lei-tuo-bu-jie-gou/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -617,8 +567,8 @@ x <span class="token operator">=</span> <span class="token number">2.236068</spa
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95/">
-                                    <span class="chip bg-color">牛顿迭代法</span>
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB/">
+                                    <span class="chip bg-color">计算机网络分类</span>
                                 </a>
                             
                         </div>
@@ -790,17 +740,18 @@ x <span class="token operator">=</span> <span class="token number">2.236068</spa
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/02/11/shi-xian-jian-yi-de-dan-yuan-ce-shi-kuang-jia/">
+                <a href="/2021/02/19/ji-suan-ji-wang-luo-de-fen-lei-tuo-bu-jie-gou/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="单元测试框架">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="计算机网络的分类">
                         
-                        <span class="card-title">单元测试框架</span>
+                        <span class="card-title">计算机网络的分类</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -810,26 +761,27 @@ x <span class="token operator">=</span> <span class="token number">2.236068</spa
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
-                                    项目
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    计算机网络
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">单元测试</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB/">
+                        <span class="chip bg-color">计算机网络分类</span>
                     </a>
                     
                 </div>
@@ -843,13 +795,13 @@ x <span class="token operator">=</span> <span class="token number">2.236068</spa
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/10/su-shu-shai/">
+                <a href="/2021/02/19/ji-suan-ji-wang-luo-de-mo-xing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="素数筛">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="计算机网络的模型">
                         
-                        <span class="card-title">素数筛</span>
+                        <span class="card-title">计算机网络的模型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -860,14 +812,14 @@ x <span class="token operator">=</span> <span class="token number">2.236068</spa
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-19
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
+                                    计算机网络
                                 </a>
                             
                             
@@ -877,8 +829,8 @@ x <span class="token operator">=</span> <span class="token number">2.236068</spa
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%B4%A0%E6%95%B0%E7%AD%9B/">
-                        <span class="chip bg-color">素数筛</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">
+                        <span class="chip bg-color">计算机网络模型</span>
                     </a>
                     
                 </div>
