@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>C++实现一个复数类</title>
+      <link href="2021/03/05/c-shi-xian-yi-ge-fu-shu-lei/"/>
+      <url>2021/03/05/c-shi-xian-yi-ge-fu-shu-lei/</url>
+      
+        <content type="html"><![CDATA[<h1><span id="c实现一个复数类">C++实现一个复数类</span></h1><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;#include &lt;ostream&gt;#include &lt;string&gt;using namespace std;class Complex &#123;public:    Complex();    Complex(double, double);    Complex(const Complex &amp;) &#x3D; default;    Complex operator+(const Complex &amp;);    Complex operator-(const Complex &amp;);    Complex operator*(const Complex &amp;);    Complex operator&#x2F;(const Complex &amp;);    friend ostream &amp;operator&lt;&lt;(ostream &amp;, const Complex &amp;);private:    double realPart;    double imaginaryPart;&#125;;Complex::Complex(): Complex(0, 0) &#123;&#125;Complex::Complex(double x, double y): realPart(x), imaginaryPart(y) &#123;&#125;Complex Complex::operator+(const Complex &amp;x) &#123;    Complex result;    result.realPart &#x3D; this-&gt;realPart + x.realPart;    result.imaginaryPart &#x3D; this-&gt;imaginaryPart + x.imaginaryPart;    return result;&#125;Complex Complex::operator-(const Complex &amp;x) &#123;    Complex result;    result.realPart &#x3D; this-&gt;realPart - x.realPart;    result.imaginaryPart &#x3D; this-&gt;imaginaryPart - x.imaginaryPart;    return result;&#125;Complex Complex::operator*(const Complex &amp;x) &#123;    Complex result;    result.realPart &#x3D; this-&gt;realPart * x.realPart - this-&gt;imaginaryPart * x.imaginaryPart;    result.imaginaryPart &#x3D; this-&gt;realPart * x.imaginaryPart + this-&gt;imaginaryPart * x.realPart;    return result;&#125;Complex Complex::operator&#x2F;(const Complex &amp;x) &#123;    Complex result;    result.realPart &#x3D; (this-&gt;realPart * x.realPart + this-&gt;imaginaryPart * x.imaginaryPart) &#x2F;                       (x.realPart * x.realPart + x.imaginaryPart * x.imaginaryPart);    result.imaginaryPart &#x3D; (this-&gt;imaginaryPart * x.realPart - this-&gt;realPart * x.imaginaryPart) &#x2F;                           (x.realPart * x.realPart + x.imaginaryPart * x.imaginaryPart);    return result;&#125;ostream &amp;operator&lt;&lt;(ostream &amp;out, const Complex &amp;x) &#123;    string opt &#x3D; &quot;+&quot;;    double realPart &#x3D; x.realPart;    double imaginaryPart &#x3D; x.imaginaryPart;    if (x.imaginaryPart &lt; 0) &#123;        opt &#x3D; &quot;-&quot;;        imaginaryPart &#x3D; -x.imaginaryPart;    &#125;    out &lt;&lt; realPart &lt;&lt; &quot; &quot; &lt;&lt; opt &lt;&lt; &quot; &quot; &lt;&lt; imaginaryPart &lt;&lt; &quot;i&quot;;    return out;&#125;int main() &#123;    Complex a(3, 4);    Complex b(6, 7);    cout &lt;&lt; a &lt;&lt; endl;    cout &lt;&lt; b &lt;&lt; endl;    cout &lt;&lt; &quot;plus: &quot; &lt;&lt; a + b &lt;&lt; endl;    cout &lt;&lt; &quot;minus: &quot; &lt;&lt; a - b &lt;&lt; endl;    cout &lt;&lt; &quot;multiply: &quot; &lt;&lt; a * b &lt;&lt; endl;    cout &lt;&lt; &quot;divide: &quot; &lt;&lt; a &#x2F; b &lt;&lt; endl;    return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> C++ </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面向对象 </tag>
+            
+            <tag> 练习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>合并果子题目和Huffman编码的关系</title>
       <link href="2021/03/04/he-bing-guo-zi-ti-mu-he-huffman-bian-ma-de-guan-xi/"/>
       <url>2021/03/04/he-bing-guo-zi-ti-mu-he-huffman-bian-ma-de-guan-xi/</url>

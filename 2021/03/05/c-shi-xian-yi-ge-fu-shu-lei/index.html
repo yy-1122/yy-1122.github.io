@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="变参函数和变参宏定义, 学习 技术 计算机">
+    <meta name="keywords" content="C++实现一个复数类, 学习 技术 计算机">
     <meta name="description" content="虚幻小羊的成长空间">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>变参函数和变参宏定义 | 虚幻小羊</title>
+    <title>C++实现一个复数类 | 虚幻小羊</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">变参函数和变参宏定义</h1>
+                    <h1 class="description center-align post-title">C++实现一个复数类</h1>
                 </div>
             </div>
         </div>
@@ -431,12 +431,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%87%BD%E6%95%B0/">
-                                <span class="chip bg-color">函数</span>
+                            <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                                <span class="chip bg-color">面向对象</span>
                             </a>
                         
-                            <a href="/tags/%E5%AE%8F/">
-                                <span class="chip bg-color">宏</span>
+                            <a href="/tags/%E7%BB%83%E4%B9%A0/">
+                                <span class="chip bg-color">练习</span>
                             </a>
                         
                     </div>
@@ -447,8 +447,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
-                                C语言
+                            <a href="/categories/C/" class="post-category">
+                                C++
                             </a>
                         
                     </div>
@@ -460,28 +460,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-02-09
+                    2021-03-05
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-02-11
+                    2021-03-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    883
+                    399
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -504,79 +504,84 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2><span id="一-变参函数介绍">一、变参函数介绍</span></h2><p>C 语言允许定义参数数量可变的函数，这称为可变参数函数（variadic function）。这种函数需要固定数量的强制参数（mandatory argument），后面是数量可变的可选参数（optional argument）。</p>
-<p>可变参数函数要获取可选参数时，必须通过一个类型为 va_list 的对象，它包含了参数信息。这种类型的对象也称为参数指针（argument pointer），它包含了栈中至少一个参数的位置。可以使用这个参数指针从一个可选参数移动到下一个可选参数，由此，函数就可以获取所有的可选参数。va_list 类型被定义在头文件 stdarg.h 中。</p>
-<h2><span id="二-使用方法">二、使用方法</span></h2><ul>
-<li>定义一个函数，最后一个参数为省略号，省略号前面可以设置自定义参数。</li>
-<li>在函数定义中创建一个 <strong>va_list</strong> 类型变量，该类型是在 stdarg.h 头文件中定义的。</li>
-<li>使用 固定参数和 <strong>va_start</strong> 宏来初始化 <strong>va_list</strong> 变量为一个参数列表。宏 va_start 是在 stdarg.h 头文件中定义的。</li>
-<li>使用 <strong>va_arg</strong> 宏和 <strong>va_list</strong> 变量来访问参数列表中的每个项。</li>
-<li>使用宏 <strong>va_end</strong> 来清理赋予 <strong>va_list</strong> 变量的内存。</li>
-</ul>
-<h4><span id="代码演示">代码演示</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdint></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;inttypes.h></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdarg.h></span></span>
+                <h1><span id="c实现一个复数类">C++实现一个复数类</span></h1><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;
+#include &lt;ostream&gt;
+#include &lt;string&gt;
+using namespace std;
 
-<span class="token keyword">int</span> <span class="token function">IntMax</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> ans <span class="token operator">=</span> INT32_MIN<span class="token punctuation">;</span>
-    va_list arg<span class="token punctuation">;</span>
-    <span class="token function">va_start</span><span class="token punctuation">(</span>arg<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>n<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> temp <span class="token operator">=</span> <span class="token function">va_arg</span><span class="token punctuation">(</span>arg<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>ans <span class="token operator">&lt;</span> temp<span class="token punctuation">)</span> ans <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token function">va_end</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+class Complex &#123;
+public:
+    Complex();
+    Complex(double, double);
+    Complex(const Complex &amp;) &#x3D; default;
+    Complex operator+(const Complex &amp;);
+    Complex operator-(const Complex &amp;);
+    Complex operator*(const Complex &amp;);
+    Complex operator&#x2F;(const Complex &amp;);
+    friend ostream &amp;operator&lt;&lt;(ostream &amp;, const Complex &amp;);
+private:
+    double realPart;
+    double imaginaryPart;
+&#125;;
 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"max = %d\n"</span><span class="token punctuation">,</span> <span class="token function">IntMax</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"max = %d\n"</span><span class="token punctuation">,</span><span class="token function">IntMax</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"max = %d\n"</span><span class="token punctuation">,</span><span class="token function">IntMax</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4><span id="运行结果">运行结果：</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"> <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
-max <span class="token operator">=</span> <span class="token number">3</span>
-max <span class="token operator">=</span> <span class="token number">5</span>
-max <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2><span id="三-变参宏定义">三、变参宏定义</span></h2><p>C99中规定宏可以像函数一样带有可变参数，比如</p>
-<pre class="line-numbers language-none"><code class="language-none">#define LOG(format, ...) fprintf(stdout, format, __VA_ARGS__)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>其中，…表示参数可变，__VA_ARGS__在预处理中为实际的参数集所替换</p>
-<p>GCC中同时支持如下的形式</p>
-<pre class="line-numbers language-none"><code class="language-none">#define LOG(format, args...) fprintf(stdout, format, args)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>其用法和上面的基本一致，只是参数符号有变化</p>
-<p><strong>可变参数的宏里的‘##’操作说明</strong> </p>
-<p>GNU CPP还有两种更复杂的宏扩展，支持上面两种格式的定义格式。</p>
-<p>在标准C里，你不能省略可变参数，但是你却可以给它传递一个空的参数。例如，下面的宏调用在ISO C里是非法的，因为字符串后面没有逗号：</p>
-<p>debug (“A message”)</p>
-<p>GNU CPP在这种情况下可以让你完全的忽略可变参数。在上面的例子中，编译器仍然会有问题（complain），因为宏展开后，里面的字符串后面会有个多余的逗号。</p>
-<p>为了解决这个问题，CPP使用一个特殊的‘##’操作。书写格式为：</p>
-<p>#define debug(format, …) fprintf (stderr, format, ## __VA_ARGS__)</p>
-<p>这里，如果可变参数被忽略或为空，‘##’操作将使预处理器（preprocessor）去除掉它前面的那个逗号。如果你在宏调用时，确实提供了一些可变参数，GNU CPP也会工作正常，它会把这些可变参数放到逗号的后面。象其它的pasted macro参数一样，这些参数不是宏的扩展。</p>
-<h4><span id="代码演示">代码演示：</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdint></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;inttypes.h></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdarg.h></span></span>
+Complex::Complex(): Complex(0, 0) &#123;&#125;
 
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">LOG</span><span class="token expression"><span class="token punctuation">(</span>frm<span class="token punctuation">,</span> args<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></span><span class="token punctuation">\</span>
-    <span class="token expression"><span class="token function">printf</span><span class="token punctuation">(</span>frm<span class="token punctuation">,</span> </span><span class="token punctuation">##</span><span class="token expression">args<span class="token punctuation">)</span><span class="token punctuation">;</span></span><span class="token punctuation">\</span>
-<span class="token expression"><span class="token punctuation">&#125;</span></span></span>
+Complex::Complex(double x, double y): realPart(x), imaginaryPart(y) &#123;&#125;
 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> c <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
-    <span class="token function">LOG</span><span class="token punctuation">(</span><span class="token string">"LOG1\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">LOG</span><span class="token punctuation">(</span><span class="token string">"LOG2: %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">LOG</span><span class="token punctuation">(</span><span class="token string">"LOG3: %d, %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">LOG</span><span class="token punctuation">(</span><span class="token string">"LOG4: %d, %d, %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4><span id="运行结果">运行结果：</span></h4><pre class="line-numbers language-c" data-language="c"><code class="language-c">$ <span class="token punctuation">.</span><span class="token operator">/</span>a<span class="token punctuation">.</span>out
-LOG1
-LOG2<span class="token operator">:</span> <span class="token number">1</span>
-LOG3<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span>
-LOG4<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Complex Complex::operator+(const Complex &amp;x) &#123;
+    Complex result;
+    result.realPart &#x3D; this-&gt;realPart + x.realPart;
+    result.imaginaryPart &#x3D; this-&gt;imaginaryPart + x.imaginaryPart;
+    return result;
+&#125;
+
+Complex Complex::operator-(const Complex &amp;x) &#123;
+    Complex result;
+    result.realPart &#x3D; this-&gt;realPart - x.realPart;
+    result.imaginaryPart &#x3D; this-&gt;imaginaryPart - x.imaginaryPart;
+    return result;
+&#125;
+
+Complex Complex::operator*(const Complex &amp;x) &#123;
+    Complex result;
+    result.realPart &#x3D; this-&gt;realPart * x.realPart - this-&gt;imaginaryPart * x.imaginaryPart;
+    result.imaginaryPart &#x3D; this-&gt;realPart * x.imaginaryPart + this-&gt;imaginaryPart * x.realPart;
+    return result;
+&#125;
+
+Complex Complex::operator&#x2F;(const Complex &amp;x) &#123;
+    Complex result;
+    result.realPart &#x3D; (this-&gt;realPart * x.realPart + this-&gt;imaginaryPart * x.imaginaryPart) &#x2F; 
+                      (x.realPart * x.realPart + x.imaginaryPart * x.imaginaryPart);
+    result.imaginaryPart &#x3D; (this-&gt;imaginaryPart * x.realPart - this-&gt;realPart * x.imaginaryPart) &#x2F;
+                           (x.realPart * x.realPart + x.imaginaryPart * x.imaginaryPart);
+    return result;
+&#125;
+
+ostream &amp;operator&lt;&lt;(ostream &amp;out, const Complex &amp;x) &#123;
+    string opt &#x3D; &quot;+&quot;;
+    double realPart &#x3D; x.realPart;
+    double imaginaryPart &#x3D; x.imaginaryPart;
+    if (x.imaginaryPart &lt; 0) &#123;
+        opt &#x3D; &quot;-&quot;;
+        imaginaryPart &#x3D; -x.imaginaryPart;
+    &#125;
+    out &lt;&lt; realPart &lt;&lt; &quot; &quot; &lt;&lt; opt &lt;&lt; &quot; &quot; &lt;&lt; imaginaryPart &lt;&lt; &quot;i&quot;;
+    return out;
+&#125;
+
+int main() &#123;
+    Complex a(3, 4);
+    Complex b(6, 7);
+    cout &lt;&lt; a &lt;&lt; endl;
+    cout &lt;&lt; b &lt;&lt; endl;
+    cout &lt;&lt; &quot;plus: &quot; &lt;&lt; a + b &lt;&lt; endl;
+    cout &lt;&lt; &quot;minus: &quot; &lt;&lt; a - b &lt;&lt; endl;
+    cout &lt;&lt; &quot;multiply: &quot; &lt;&lt; a * b &lt;&lt; endl;
+    cout &lt;&lt; &quot;divide: &quot; &lt;&lt; a &#x2F; b &lt;&lt; endl;
+    return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -593,7 +598,7 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">Lamp</a>
+                    <a href="/about" rel="external nofollow noreferrer">虚幻小羊</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -603,7 +608,7 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yy-1122.github.io/2021/02/09/ke-bian-can-shu-han-shu/">http://yy-1122.github.io/2021/02/09/ke-bian-can-shu-han-shu/</a>
+                    <a href="http://yy-1122.github.io/2021/03/05/c-shi-xian-yi-ge-fu-shu-lei/">http://yy-1122.github.io/2021/03/05/c-shi-xian-yi-ge-fu-shu-lei/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -616,7 +621,7 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">Lamp</a>
+                    <a href="/about" target="_blank">虚幻小羊</a>
                     !
                 </span>
             </div>
@@ -641,12 +646,12 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%87%BD%E6%95%B0/">
-                                    <span class="chip bg-color">函数</span>
+                                <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                                    <span class="chip bg-color">面向对象</span>
                                 </a>
                             
-                                <a href="/tags/%E5%AE%8F/">
-                                    <span class="chip bg-color">宏</span>
+                                <a href="/tags/%E7%BB%83%E4%B9%A0/">
+                                    <span class="chip bg-color">练习</span>
                                 </a>
                             
                         </div>
@@ -818,17 +823,18 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/02/10/xian-xing-shai/">
+                <a href="/2021/03/05/c-shi-xian-yi-ge-fu-shu-lei/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="线性筛">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="C++实现一个复数类">
                         
-                        <span class="card-title">线性筛</span>
+                        <span class="card-title">C++实现一个复数类</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -838,26 +844,31 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/C/" class="post-category">
+                                    C++
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%BA%BF%E6%80%A7%E7%AD%9B/">
-                        <span class="chip bg-color">线性筛</span>
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                        <span class="chip bg-color">面向对象</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BB%83%E4%B9%A0/">
+                        <span class="chip bg-color">练习</span>
                     </a>
                     
                 </div>
@@ -871,13 +882,13 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/09/ou-ji-li-de-suan-fa/">
+                <a href="/2021/03/04/he-bing-guo-zi-ti-mu-he-huffman-bian-ma-de-guan-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="欧几里得和扩展欧几里得算法">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="合并果子题目和Huffman编码的关系">
                         
-                        <span class="card-title">欧几里得和扩展欧几里得算法</span>
+                        <span class="card-title">合并果子题目和Huffman编码的关系</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -888,14 +899,14 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E7%BB%83%E4%B9%A0/" class="post-category">
+                                    练习
                                 </a>
                             
                             
@@ -905,8 +916,8 @@ LOG4<span class="token operator">:</span> <span class="token number">1</span><sp
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">基础算法</span>
+                    <a href="/tags/%E7%BB%83%E4%B9%A0/">
+                        <span class="chip bg-color">练习</span>
                     </a>
                     
                 </div>
