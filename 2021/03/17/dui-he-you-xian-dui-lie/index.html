@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="线性筛, 学习 技术 计算机">
+    <meta name="keywords" content="堆和优先队列, 学习 技术 计算机">
     <meta name="description" content="虚幻小羊的成长空间">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>线性筛 | 虚幻小羊</title>
+    <title>堆和优先队列 | 虚幻小羊</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">线性筛</h1>
+                    <h1 class="description center-align post-title">堆和优先队列</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%BA%BF%E6%80%A7%E7%AD%9B/">
-                                <span class="chip bg-color">线性筛</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">数据结构</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                算法
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                数据结构
                             </a>
                         
                     </div>
@@ -456,28 +456,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-02-10
+                    2021-03-17
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-02-10
+                    2021-03-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    253
+                    536
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -500,35 +500,99 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1><span id="线性筛">线性筛</span></h1><h2><span id="一-原理">一、原理</span></h2><p>1、标记一个范围内的数字是否是合数，没有被标记的则为素数</p>
-<p>2、算法的空间复杂度为O(N)，时间复杂度为O(N)</p>
-<p>3、总体思想是用一个整数M去标记合数N，其中N和M具有如下性质<br>1）N中最小的素数为p<br>2）N =  p * M<br>3）p一定小于等于M中最小的素因子<br>4）利用M * P(所有不大于M中最小素数的集合）标记N1、N2、N3 …..</p>
-<h2><span id="二-代码">二、代码</span></h2><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;cstdio></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">MAX_N</span> <span class="token expression"><span class="token number">10000</span></span></span>
+                <h1><span id="一-堆和优先队列">一、堆和优先队列</span></h1><h2><span id="1-介绍">1、介绍</span></h2><p>优先队列(堆)和其实是队列的一种<br>普通队列：先进先出；后进先出<br>优先队列：出队顺序和入队顺序无关；和优先级相关</p>
+<p><img src="https://i.loli.net/2021/03/17/81rHGhwiORID6TE.jpg"></p>
+<h2><span id="2-实现过程">2、实现过程</span></h2><p>堆本身也是一棵树，其实堆也有很多种，我们在这里主要使用二叉树来表示堆，说白了，<strong>二叉堆就是满足一些特殊性质的二叉树：</strong></p>
+<p>1）二叉堆是一棵<strong>完全二叉树</strong></p>
+<p>2）堆中某个节点的值总是不大于其父节点的值（所以也叫做<strong>最大堆</strong>），注意：层次大的元素值不一定小于层次小的元素</p>
+<p><img src="https://i.loli.net/2021/03/17/SlaRU1CF6gpHGh7.jpg"></p>
+<p>弹出堆顶元素</p>
+<p><img src="https://i.loli.net/2021/03/17/gD7Rj9uFGhPqWwI.jpg"></p>
+<h1><span id="二-代码">二、代码</span></h1><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;time.h></span></span>
 
-<span class="token keyword">int</span> prime<span class="token punctuation">[</span>MAX_N <span class="token operator">+</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">swap</span><span class="token expression"><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></span><span class="token punctuation">\</span>
+    <span class="token expression"><span class="token function">__typeof</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> __temp <span class="token operator">=</span> a<span class="token punctuation">;</span></span><span class="token punctuation">\</span>
+    <span class="token expression">a <span class="token operator">=</span> b<span class="token punctuation">;</span> b <span class="token operator">=</span> __temp<span class="token punctuation">;</span></span><span class="token punctuation">\</span>
+<span class="token expression"><span class="token punctuation">&#125;</span></span></span>
 
-<span class="token keyword">void</span> <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> MAX_N<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>prime<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> prime<span class="token punctuation">[</span><span class="token operator">++</span>prime<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> prime<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">*</span> prime<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> MAX_N<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token comment">//确定i，不断遍历已有素数表中的素数来标记合数</span>
-            prime<span class="token punctuation">[</span>i <span class="token operator">*</span> prime<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token comment">//如果 prime[j] 已经是 i 的最小素因子了，则跳出循环</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">%</span> prime<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">priority_queue</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>data<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> cnt<span class="token punctuation">,</span> size<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> priority_queue<span class="token punctuation">;</span>
+
+priority_queue <span class="token operator">*</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    priority_queue <span class="token operator">*</span>q <span class="token operator">=</span> <span class="token punctuation">(</span>priority_queue <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>priority_queue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token operator">-></span>data <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    q<span class="token operator">-></span>cnt <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    q<span class="token operator">-></span>size <span class="token operator">=</span> n<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> q<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">empty</span><span class="token punctuation">(</span>priority_queue <span class="token operator">*</span>q<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> q<span class="token operator">-></span>cnt <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">top</span><span class="token punctuation">(</span>priority_queue <span class="token operator">*</span>q<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> q<span class="token operator">-></span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">push</span><span class="token punctuation">(</span>priority_queue <span class="token operator">*</span>q<span class="token punctuation">,</span> <span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>q <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>q<span class="token operator">-></span>cnt <span class="token operator">==</span> q<span class="token operator">-></span>size<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    q<span class="token operator">-></span>data<span class="token punctuation">[</span><span class="token operator">++</span><span class="token punctuation">(</span>q<span class="token operator">-></span>cnt<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> val<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> ind <span class="token operator">=</span> q<span class="token operator">-></span>cnt<span class="token punctuation">;</span>
+    <span class="token comment">//上滤调整，如果当前节点比父节点大，则交换</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>ind <span class="token operator">>></span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> q<span class="token operator">-></span>data<span class="token punctuation">[</span>ind<span class="token punctuation">]</span> <span class="token operator">></span> q<span class="token operator">-></span>data<span class="token punctuation">[</span>ind <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">swap</span><span class="token punctuation">(</span>q<span class="token operator">-></span>data<span class="token punctuation">[</span>ind<span class="token punctuation">]</span><span class="token punctuation">,</span> q<span class="token operator">-></span>data<span class="token punctuation">[</span>ind <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ind <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">int</span> <span class="token function">pop</span><span class="token punctuation">(</span>priority_queue <span class="token operator">*</span>q<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>q <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">empty</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    q<span class="token operator">-></span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> q<span class="token operator">-></span>data<span class="token punctuation">[</span>q<span class="token operator">-></span>cnt<span class="token operator">--</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> ind <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token comment">//下滤调整，更新当前节点，将当前节点调整为其和子节点的最大值</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>ind <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> q<span class="token operator">-></span>cnt<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> temp <span class="token operator">=</span> ind<span class="token punctuation">,</span> l <span class="token operator">=</span> ind <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">,</span> r <span class="token operator">=</span> ind <span class="token operator">&lt;&lt;</span> <span class="token number">1</span> <span class="token operator">|</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>q<span class="token operator">-></span>data<span class="token punctuation">[</span>l<span class="token punctuation">]</span> <span class="token operator">></span> q<span class="token operator">-></span>data<span class="token punctuation">[</span>temp<span class="token punctuation">]</span><span class="token punctuation">)</span> temp <span class="token operator">=</span> l<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>r <span class="token operator">&lt;=</span> q<span class="token operator">-></span>cnt <span class="token operator">&amp;&amp;</span> q<span class="token operator">-></span>data<span class="token punctuation">[</span>r<span class="token punctuation">]</span> <span class="token operator">></span> q<span class="token operator">-></span>data<span class="token punctuation">[</span>temp<span class="token punctuation">]</span><span class="token punctuation">)</span> temp <span class="token operator">=</span> r<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">==</span> ind<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token function">swap</span><span class="token punctuation">(</span>q<span class="token operator">-></span>data<span class="token punctuation">[</span>ind<span class="token punctuation">]</span><span class="token punctuation">,</span> q<span class="token operator">-></span>data<span class="token punctuation">[</span>temp<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ind <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">clear</span><span class="token punctuation">(</span>priority_queue <span class="token operator">*</span>q<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>q <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>q<span class="token operator">-></span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> prime<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> prime<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">srand</span><span class="token punctuation">(</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">max_op</span> <span class="token expression"><span class="token number">20</span></span></span>
+    priority_queue <span class="token operator">*</span>q <span class="token operator">=</span> <span class="token function">init</span><span class="token punctuation">(</span>max_op<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> max_op<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> val <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token number">100</span><span class="token punctuation">;</span>
+        <span class="token function">push</span><span class="token punctuation">(</span>q<span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"insert %d to the priority_queue!\n"</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> max_op<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span> <span class="token function">top</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">pop</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">undef</span> <span class="token expression">max_op</span></span>
+    <span class="token function">clear</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -545,7 +609,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">Lamp</a>
+                    <a href="/about" rel="external nofollow noreferrer">虚幻小羊</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -555,7 +619,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://yy-1122.github.io/2021/02/10/xian-xing-shai/">http://yy-1122.github.io/2021/02/10/xian-xing-shai/</a>
+                    <a href="http://yy-1122.github.io/2021/03/17/dui-he-you-xian-dui-lie/">http://yy-1122.github.io/2021/03/17/dui-he-you-xian-dui-lie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -568,7 +632,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">Lamp</a>
+                    <a href="/about" target="_blank">虚幻小羊</a>
                     !
                 </span>
             </div>
@@ -593,8 +657,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%BA%BF%E6%80%A7%E7%AD%9B/">
-                                    <span class="chip bg-color">线性筛</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">数据结构</span>
                                 </a>
                             
                         </div>
@@ -770,13 +834,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/02/10/su-shu-shai/">
+                <a href="/2021/03/17/ha-xi-biao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="素数筛">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="哈希表">
                         
-                        <span class="card-title">素数筛</span>
+                        <span class="card-title">哈希表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -787,14 +851,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-02-10
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-17
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                    数据结构
                                 </a>
                             
                             
@@ -804,8 +868,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%B4%A0%E6%95%B0%E7%AD%9B/">
-                        <span class="chip bg-color">素数筛</span>
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">数据结构</span>
                     </a>
                     
                 </div>
@@ -819,13 +883,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/09/ke-bian-can-shu-han-shu/">
+                <a href="/2021/03/05/c-shi-xian-yi-ge-fu-shu-lei/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="变参函数和变参宏定义">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="C++实现一个复数类">
                         
-                        <span class="card-title">变参函数和变参宏定义</span>
+                        <span class="card-title">C++实现一个复数类</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -836,14 +900,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    C语言
+                            <a href="/categories/C/" class="post-category">
+                                    C++
                                 </a>
                             
                             
@@ -853,12 +917,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%87%BD%E6%95%B0/">
-                        <span class="chip bg-color">函数</span>
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                        <span class="chip bg-color">面向对象</span>
                     </a>
                     
-                    <a href="/tags/%E5%AE%8F/">
-                        <span class="chip bg-color">宏</span>
+                    <a href="/tags/%E7%BB%83%E4%B9%A0/">
+                        <span class="chip bg-color">练习</span>
                     </a>
                     
                 </div>
